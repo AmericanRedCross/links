@@ -9,13 +9,16 @@ const tagsKey = 'tags';
 const workstreamsKey = 'workstreams';
 
 /* USE TABLETOP.JS TO GRAB OUR LINK DATA FROM A GOOGLE SHEET */
-var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1_wTA4jZaujZvV6RfwGmgiffwHOUe1Pv3Gb7ae0lXx1M/edit?usp=sharing';
+var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1_wTA4jZaujZvV6RfwGmgiffwHOUe1Pv3Gb7ae0lXx1M/pub?output=csv';
 function fetchSpreadsheet() {
     return new Promise(function(resolve, reject) {
-      Tabletop.init( { key: publicSpreadsheetUrl,
-                       callback: function(data, tabletop) { resolve(data) },
-                       simpleSheet: true }
-                    )
+      Papa.parse(publicSpreadsheetUrl, {
+        download: true,
+        header: true,
+        complete: function(results) {
+          resolve(results.data);
+        }
+      });
     });
 }
 Promise.all([fetchSpreadsheet()]).then(function(values) {
