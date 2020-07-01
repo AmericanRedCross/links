@@ -9,7 +9,7 @@ const tagsKey = 'tags';
 const workstreamsKey = 'workstreams';
 
 /* USE TABLETOP.JS TO GRAB OUR LINK DATA FROM A GOOGLE SHEET */
-var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1_wTA4jZaujZvV6RfwGmgiffwHOUe1Pv3Gb7ae0lXx1M/pub?output=csv';
+var publicSpreadsheetUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://docs.google.com/spreadsheets/d/1_wTA4jZaujZvV6RfwGmgiffwHOUe1Pv3Gb7ae0lXx1M/pub?output=csv';
 function fetchSpreadsheet() {
     return new Promise(function(resolve, reject) {
       Papa.parse(publicSpreadsheetUrl, {
