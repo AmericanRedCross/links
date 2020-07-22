@@ -1,4 +1,9 @@
-# link-frog
+# Sub-sites
+
+- [COVID-19 links](https://americanredcross.github.io/links/covid-19/)
+- [Wildfire planning links](https://americanredcross.github.io/links/wildfire-planning/)
+
+# link-frog tool
 
 A simple tool to grab a list of links from a Google spreadsheet and make it a little friendlier to search and navigate. Original project at https://github.com/AmericanRedCross/link-frog.
 
