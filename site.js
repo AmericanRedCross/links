@@ -1,15 +1,9 @@
 /* GLOBAL VARIABLES */
 var links, linkCards;
 
-const titleKey = 'title';
-const descriptionKey = 'description';
-const urlKey = 'url';
-const typesKey = 'types';
-const tagsKey = 'tags';
-const workstreamsKey = 'workstreams';
+/* OTHER VARIABLES ON THE RELEVANT INDEX.HTML FILE */
 
 /* USE TABLETOP.JS TO GRAB OUR LINK DATA FROM A GOOGLE SHEET */
-var publicSpreadsheetUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://docs.google.com/spreadsheets/d/1_wTA4jZaujZvV6RfwGmgiffwHOUe1Pv3Gb7ae0lXx1M/pub?output=csv';
 function fetchSpreadsheet() {
     return new Promise(function(resolve, reject) {
       Papa.parse(publicSpreadsheetUrl, {
@@ -123,6 +117,10 @@ function buildFilters(){
       return 'tagFilter(this,"workstreams","' + d + '")';
     })
     .html(function(d) { return d; })    
+    
+  if(allTypes.length ==  0) { d3.select('#filters-types').remove(); }
+  if(allTags.length ==  0) { d3.select('#filters-tags').remove(); }
+  if(allWorkstreams.length ==  0) { d3.select('#filters-workstreams').remove(); }
   
   updateCards();
 }
@@ -204,15 +202,14 @@ function updateCards() {
         var html = '<div class="card mb-3 mx-1"><div class="card-body">' +
             '<span class="search-wrap">' +
               '<h6 class="card-title">' + d[titleKey] + '</h6>' +
-              '<div><small>' + d[descriptionKey] + ' - ' +
-              ( (!d[urlKey].length) ? '(sorry, link is missing)' : '<a target="_blank" href="' + d[urlKey] + '">link <i class="fas fa-external-link-alt"></i></a>') +
-              '</small><br>' +
+                ( (!d[descriptionKey]) ? '' : '<div><small>' + d[descriptionKey] + '</small><br>' ) +
             '<span>' +
               '<span class="text-muted"><small>' + 
                 ( (myTypes.length > 1) ?  '| &nbsp;' + '<em>' + myTypes + '</em>' : '') +
                 ( (myTags.length > 1) ? '&nbsp; | &nbsp;' + '<em>' + myTags + '</em>' : '') +
                 ( (myWorkstreams.length > 1) ? '&nbsp; | &nbsp;' + '<em>' + myWorkstreams + '</em>'  : '') +
-                '&nbsp; |' +
+                '&nbsp; | &nbsp;' +
+                ( (!d[urlKey].length) ? '(sorry, link is missing)' : '<a target="_blank" href="' + d[urlKey] + '">link <i class="fas fa-external-link-alt"></i></a>') +
               '</small></span>' +
               '</div>' +
             '</div></div>'
