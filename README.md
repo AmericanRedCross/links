@@ -1,6 +1,7 @@
 # Sub-sites
 
 - [COVID-19 links](https://americanredcross.github.io/links/covid-19/)
+- [Preparedness links](https://americanredcross.github.io/links/preparedness/)
 - [Wildfire planning links](https://americanredcross.github.io/links/wildfire-planning/)
 
 # link-frog tool
